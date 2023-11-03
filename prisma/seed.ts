@@ -36,7 +36,7 @@ async function createRandomPurchase(userId: string, widgetId: string) {
   });
 }
 
-async function main() {
+async function seedDatabase() {
   const numberOfUsers = 10; // Define the number of users to create.
 
   for (let i = 0; i < numberOfUsers; i++) {
@@ -54,7 +54,7 @@ async function main() {
   }
 }
 
-main()
+seedDatabase()
   .catch((e) => {
     console.error(e);
     process.exit(1);
@@ -62,3 +62,5 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
+
+  export default seedDatabase;

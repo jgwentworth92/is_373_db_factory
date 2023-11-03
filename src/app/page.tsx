@@ -1,6 +1,21 @@
 import Link from "next/link";
 
 export default function HomePage() {
+   // Event handler for button click
+   const handleSeedDatabase = async () => {
+    // Call the API route which runs the seed script
+    const response = await fetch('/api/seed', {
+      method: 'POST',
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+      alert(result.message); // Alert the result message
+    } else {
+      alert('Failed to seed database.');
+    }
+  };
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
       <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
