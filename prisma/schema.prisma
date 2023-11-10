@@ -40,3 +40,12 @@ model Widget {
     creatorId  String
     purchases  Purchase[] // One Widget can have many Purchases
 }
+
+
+
+
+model toDo {
+    id              String      @id @default(uuid())
+    name          String
+   
+}
