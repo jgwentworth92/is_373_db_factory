@@ -50,7 +50,7 @@ export default function AddTodoPage() {
               <th className="p-3 text-left">#</th>
               <th className="p-3 text-left">ID</th>
               <th className="p-3">Todo</th>
-              <th className="p-3">Actions</th>
+              
             </tr>
           </thead>
           <tbody>
