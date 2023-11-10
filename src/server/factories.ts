@@ -16,3 +16,29 @@ export async function createtoDo(todo:string) {
 
 
   }
+
+
+  export async function editToDo(id: string, newName: string) {
+    const updatedTodo = await prisma.toDo.update({
+      where: {
+        id: id, // Assumes 'id' is the unique identifier for your Todo model
+      },
+      data: {
+        name: newName, // Update the name of the Todo
+        // You can add more fields here if needed
+      },
+    });
+  
+    return updatedTodo;
+  }
+
+  export async function deleteToDo(id: string) {
+    const deletedTodo = await prisma.toDo.delete({
+      where: {
+        id: id, // Again, assumes 'id' is the unique identifier
+      },
+    });
+  
+    return deletedTodo;
+  }
+  
