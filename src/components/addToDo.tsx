@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import { useRef, useState, useTransition } from "react";
-import { PrismaClient } from "@prisma/client";
+
 import { createtoDo } from "@/server/factories";
-const prisma = new PrismaClient();
+
 export default function AddButton() {
   const [pending, startTransition] = useTransition();
   const todoRef = useRef<HTMLInputElement>(null);

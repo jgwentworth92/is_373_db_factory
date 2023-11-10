@@ -10,7 +10,7 @@ export async function createtoDo(todo:string) {
         // Assuming you have additional fields, you can add them here as needed.
       },
     });
-    await prisma.$disconnect();
+
     return createTodo
 
 

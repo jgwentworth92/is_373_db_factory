@@ -1,17 +1,40 @@
-import AddButton from "@/components/addToDo";
-import { PrismaClient } from '@prisma/client';
+
+import { PrismaClient } from "@prisma/client";
 export default async function Home() {
   const prisma = new PrismaClient();
-  const todos = await prisma.toDo.findMany()
+  const todos = await prisma.toDo.findMany();
+
   return (
-    <main className="p-5">
-      <h1 className="text-4xl font-bold">Todos</h1>
-      <AddButton />
-      <ul>
-        {todos?.map((todo, index) => (
-          <li key={index}>{todo.name}</li>
-        ))}
-      </ul>
-    </main>
+    <div className="container p-2 mx-auto rounded-md sm:p-4 dark:text-gray-100 dark:bg-gray-900">
+    <h2 className="mb-3 text-2xl font-semibold leadi">Standings</h2>
+    <div className="overflow-x-auto">
+      <table className="min-w-full text-xs">
+        <thead className="rounded-t-lg dark:bg-gray-700">
+          <tr className="text-right">
+            <th title="Ranking" className="p-3 text-left">#</th>
+            <th title="id" className="p-3 text-left">ID</th>
+            <th title="name" className="p-3">todo</th>
+          </tr>
+        </thead>
+        <tbody>
+        {todos?.map((todo, index) => 
+          <tr key={index} className="text-right border-b border-opacity-20 dark:border-gray-700 dark:bg-gray-800">
+            <td className="px-3 py-2 text-left">
+              <span>{index}</span>
+            </td>
+            <td className="px-3 py-2 text-left">
+              <span>{todo.id}</span>
+            </td>
+            <td className="px-3 py-2">
+              <span>{todo.name}</span>
+            </td>
+          </tr>
+        )}
+        </tbody>
+      </table>
+    </div>
+  </div>
   );
 }
+
+
