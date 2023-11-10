@@ -2,14 +2,14 @@
 "use client";
 import { useRef, useState, useTransition } from "react";
 
-import { createtoDo } from "@/server/factories";
+import { AddToDo } from "@/server/factories";
 
 export default function AddButton() {
   const [pending, startTransition] = useTransition();
   const todoRef = useRef<HTMLInputElement>(null);
   const [todos, settodo] = useState("");
   const handleClick = async () => {
-    const test = await createtoDo(todoRef.current!.value);
+    const test = await AddToDo(todoRef.current!.value);
     settodo(test.name);
     console.log(test)
   };
