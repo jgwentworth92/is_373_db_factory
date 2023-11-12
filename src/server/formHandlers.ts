@@ -1,8 +1,10 @@
+"use server";
+
 import { revalidatePath } from "next/cache";
 import { editToDo, AddToDo, deleteToDo } from "./factories";
 
 export async function EditAction(formData: FormData) {
-    "use server";
+ 
     console.log("passed csrf validation");
   
     // Ensure todoId is a string
@@ -24,7 +26,7 @@ export async function EditAction(formData: FormData) {
   }
   
   export async function AddAction(formData: FormData) {
-    "use server";
+
     console.log("passed csrf validation");
   
     // Ensure todoName is a string
@@ -42,7 +44,7 @@ export async function EditAction(formData: FormData) {
   
   
   export async function DeleteAction(formData: FormData) {
-    "use server";
+  
     console.log("passed csrf validation");
   
     // Extract TodoID from formData and ensure it is a string
