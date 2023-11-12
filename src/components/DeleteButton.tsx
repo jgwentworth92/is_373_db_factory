@@ -1,5 +1,6 @@
 "use client";
-import { DeleteAction } from "@/server/factories";
+
+import { DeleteAction } from "@/server/formHandlers";
 import { useFormStatus } from "react-dom";
 
 export interface DeleteProp {

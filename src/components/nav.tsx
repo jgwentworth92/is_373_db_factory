@@ -42,15 +42,6 @@ export function Header() {
               edit{" "}
             </Link>
           </li>
-          <li className="flex">
-          <Link
-              className="inline-flex items-center justify-center rounded-full bg-blue-600 px-10 py-4 text-center text-base font-normal text-white hover:bg-opacity-90 disabled:bg-gray-500 lg:px-8 xl:px-10"
-              href="/csrfTest"
-            >
-                csrfTest
-            </Link>
-        
-    </li>
         </ul>
         <button className="flex justify-end p-4 md:hidden">
           <svg

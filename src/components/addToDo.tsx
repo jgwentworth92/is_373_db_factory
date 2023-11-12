@@ -1,6 +1,6 @@
 "use client";
 
-import { AddAction } from "@/server/factories";
+import { AddAction } from "@/server/formHandlers";
 import { useFormStatus } from "react-dom";
 
 export interface addProp {

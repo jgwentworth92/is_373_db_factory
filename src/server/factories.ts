@@ -46,38 +46,3 @@ export async function GetToDo() {
 }
 
 
-export async function EditAction(formData: FormData) {
-  "use server";
-  console.log("passed csrf validation");
-  const todoId=formData.get("todoID")
-  const todoName = formData.get(`editTodo`)
-    ? formData.get(`editTodo`)
-    : "missing";
-  const updated = await editToDo(todoId, todoName);
-
-}
-
-
-export async function AddAction(formData: FormData) {
-  "use server";
-  console.log("passed csrf validation");
-
-  const todoName = formData.get(`addTodo`)
-    ? formData.get(`addTodo`)
-    : "missing";
-  const createTodo= await AddToDo(todoName);
-  revalidatePath('/add');
-}
-
-
-
-export async function DeleteAction(formData: FormData) {
-  "use server";
-  console.log("passed csrf validation");
-
-  const todoID= formData.get(`TodoID`)
-    ? formData.get(`TodoID`)
-    : "missing";
-  const createTodo= await deleteToDo(todoID);
-  revalidatePath('/delete');
-}
