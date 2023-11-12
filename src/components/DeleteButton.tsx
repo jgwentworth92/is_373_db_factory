@@ -1,23 +1,37 @@
 "use client";
-import { useState, useTransition } from "react";
 
-import { deleteToDo } from "@/server/factories"; // Make sure to import your deleteToDo function
+import { DeleteAction } from "@/server/formHandlers";
+import { useFormStatus } from "react-dom";
 
-export default function DeleteButton({ todoId, onDelete }) {
-  const [pending, startTransition] = useTransition();
+export interface DeleteProp {
+  todoId: string;
+  csrfToken: string;
+}
 
-  const handleClick = async () => {
-    await deleteToDo(todoId);
-    onDelete(); // Callback to handle UI update after deletion
-  };
-
+function Submit() {
+  const status = useFormStatus();
   return (
     <button
-      disabled={pending}
-      onClick={() => startTransition(handleClick)}
-      className="inline-flex items-center justify-center rounded-full bg-red-600 px-10 py-4 text-center text-base font-normal text-white hover:bg-opacity-90 disabled:bg-gray-500"
+      className="inline-flex items-center justify-center rounded-full bg-green-600 px-10 py-4 text-center text-base font-normal text-white hover:bg-opacity-90 disabled:bg-gray-500"
+      disabled={status.pending}
+      type="submit"
     >
-      Delete Todo
+     Delete
     </button>
+  );
+}
+export default function DeleteButton({ todoId, csrfToken }: DeleteProp) {
+  return (
+    <form action={DeleteAction}>
+      <input type="hidden" name="csrf_token" value={csrfToken} />
+
+      <input
+      
+        value={todoId}
+        name="TodoID"
+        type="hidden"
+      />
+      <Submit />
+    </form>
   );
 }

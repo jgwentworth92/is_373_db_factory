@@ -1,27 +1,18 @@
-"use client"
 
 import { useState, useEffect } from "react";
 
 import DeleteButton from "@/components/DeleteButton";
 import { GetToDo } from "@/server/factories";
+import { headers } from "next/headers";
 
 
-export default function Page() {
-    const [todos, setTodos] = useState([]);
-  
-    useEffect(() => {
-   
-      const fetchTodos = async () => {
-        const todosFromDb = await GetToDo();
-        setTodos(todosFromDb);
-      };
-      fetchTodos();
-    }, []);
-  
-    const handleDelete = (deletedTodoId: string) => {
-      setTodos(todos.filter(todo => todo?.id !== deletedTodoId));
-    };
-  
+export default async function Page() {
+  type Todo = {
+    id: string;
+    name: string;
+  };
+  const todosFromDb = await GetToDo();
+  const csrfToken = headers().get('X-CSRF-Token') || 'missing';
     return (
       <div className="container p-2 mx-auto rounded-md sm:p-4 dark:text-gray-100 dark:bg-gray-900">
         <h2 className="mb-3 text-2xl font-semibold leadi">To Do Delete</h2>
@@ -36,13 +27,13 @@ export default function Page() {
               </tr>
             </thead>
             <tbody>
-              {todos?.map((todo, index) => (
+              {todosFromDb?.map((todo, index) => (
                 <tr key={todo.id} className="text-right border-b border-opacity-20 dark:border-gray-700 dark:bg-gray-800">
                   <td className="px-3 py-2 text-left">{index + 1}</td>
                   <td className="px-3 py-2 text-left">{todo.id}</td>
                   <td className="px-3 py-2">{todo.name}</td>
                   <td className="px-3 py-2">
-                    <DeleteButton todoId={todo.id} onDelete={() => handleDelete(todo.id)} />
+                    <DeleteButton todoId={todo.id}  csrfToken={csrfToken } />
                   </td>
                 </tr>
               ))}

@@ -1,6 +1,11 @@
+'use client'
+
 import Link from "next/link";
+import React from "react";
+import { signIn } from 'next-auth/react'
 
 export function Header() {
+  const [isLoading, setIsLoading] = React.useState(false)
   return (
     <header className="p-4 dark:bg-gray-800 dark:text-gray-100">
       <div className="container mx-auto flex h-16 justify-between">

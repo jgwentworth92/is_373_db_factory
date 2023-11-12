@@ -1,9 +1,10 @@
 import EditButton from "@/components/EditButton";
 import { PrismaClient } from "@prisma/client";
+import { headers } from "next/headers";
 export default async function Home() {
   const prisma = new PrismaClient();
   const todos = await prisma.toDo.findMany();
-
+  const csrfToken = headers().get('X-CSRF-Token') || 'missing';
   return (
     <div className="container p-2 mx-auto rounded-md sm:p-4 dark:text-gray-100 dark:bg-gray-900">
     <h2 className="mb-3 text-2xl font-semibold leadi">Edit To Do List</h2>
@@ -26,7 +27,7 @@ export default async function Home() {
               <span>{todo.id}</span>
             </td>
             <td className="px-3 py-2">
-            <EditButton todoId={todo.id} initialName={todo.name} />
+            <EditButton todoId={todo.id} initialName={todo.name} csrfToken={csrfToken}/>
             </td>
           </tr>
         )}
