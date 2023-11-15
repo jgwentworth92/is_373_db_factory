@@ -62,7 +62,6 @@ Execute the tests using Jest. The testing setup is defined in package.json under
 <br>`npm run test`
 
 ### Start the Development Server
-Start the Next.js development server. The server will run on http://localhost:3000:
-`npm run dev`
-
+Start the Next.js development server
+`npm run dev`. 
 The application should now be running on http://localhost:3000.
