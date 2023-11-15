@@ -1,4 +1,52 @@
-# Create T3 App
+# Seeding & Factory Tutorial
+## Getting Started
+
+### Clone Repository
+`git clone https://github.com/jgwentworth92/is_373_db_factory.git`
+
+### Install Dependencies
+`npm install`
+
+### Set up Environment
+#### Test Environment
+Set up testing environment by creating `.env.test` file in the root directory
+```dotenv
+DATABASE_URL="file:./test.db.sqlite"
+```
+#### Production Environment
+Set up the production database in `.env`
+```dotenv
+DATABASE_URL="file:.prod/db.sqlite"
+```
+or, if you have a live database:
+```dotenv
+DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=public"
+```
+### Initialize Prism
+Initialize your Prisma setup by generating the Prisma client:
+`npx prisma generate`
+
+## Setting Up the Database with Prisma
+### Create Database Schema
+Run: `npx prisma migrate dev --name init`
+
+### Generate the test data
+Run: `npx prisma generate`
+
+### Seed the database
+Run: `npx prisma db seed -- --environment development`
+
+## Running Tests
+Execute the test command: `npm run test`
+
+### Start the Development Server
+Run the Next.js development using the following command:
+`npm run dev`
+
+The application should now be running on http://localhost:3000.
+
+
+# T3 App Info
 
 This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
 
