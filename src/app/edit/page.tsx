@@ -1,6 +1,7 @@
 import EditButton from "@/components/EditButton";
 import { PrismaClient } from "@prisma/client";
 import { headers } from "next/headers";
+
 export default async function Home() {
   const prisma = new PrismaClient();
   const todos = await prisma.toDo.findMany();

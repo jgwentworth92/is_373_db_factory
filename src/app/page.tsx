@@ -6,6 +6,9 @@ export default async function Home() {
 
   return (
     <div className="container p-2 mx-auto rounded-md sm:p-4 dark:text-gray-100 dark:bg-gray-900">
+      <a href="/api/auth/login">Login</a>
+      <br></br>
+      <a href="/api/auth/logout">Logout</a>
     <h2 className="mb-3 text-2xl font-semibold leadi">To Do list</h2>
     <div className="overflow-x-auto">
       <table className="min-w-full text-xs">
