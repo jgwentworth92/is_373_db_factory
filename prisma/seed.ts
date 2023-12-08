@@ -8,7 +8,7 @@ async function createRandomUser() {
   return prisma.user.create({
     data: {
       email: faker.internet.email(),
-      // Assuming you have additional fields, you can add them here as needed.
+      // Additional fields here as needed.
     },
   });
 }
@@ -18,7 +18,7 @@ async function createRandomWidget(creatorId: string) {
     data: {
       name: faker.commerce.productName(),
       creatorId: creatorId,
-      // If there are additional fields in the Widget model, add them here.
+      // Additional fields here.
     },
   });
 }
@@ -26,18 +26,18 @@ async function createRandomWidget(creatorId: string) {
 async function createRandomPurchase(userId: string, widgetId: string) {
   return prisma.purchase.create({
     data: {
-        status: "pending",
-      transactionId:faker.string.uuid(),
+      status: "pending",
+      transactionId: faker.string.uuid(),
       purchaseDate: faker.date.past(),
       userId: userId,
       widgetId: widgetId,
-      // If the Purchase model has more fields, they should be included here.
+      // Additional fields here.
     },
   });
 }
 
 async function main() {
-  const numberOfUsers = 10; // Define the number of users to create.
+  const numberOfUsers = 10;
 
   for (let i = 0; i < numberOfUsers; i++) {
     const user = await createRandomUser();
@@ -55,10 +55,10 @@ async function main() {
 }
 
 main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+    .catch((e) => {
+      console.error(e);
+      process.exit(1);
+    })
+    .finally(async () => {
+      await prisma.$disconnect();
+    });

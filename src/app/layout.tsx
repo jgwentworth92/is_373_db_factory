@@ -3,8 +3,6 @@ import "@/styles/globals.css";
 
 import { Inter } from "next/font/google";
 
-import { UserProvider } from '@auth0/nextjs-auth0/client';
-
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -23,14 +21,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-    <UserProvider>
       <body className={`font-sans ${inter.variable}`}>
         <div className="flex min-h-screen flex-col">
           <Header />
           <main className=" flex flex-1 flex-col">{children} </main>
         </div>
       </body>
-    </UserProvider>
     </html>
   );
 }
