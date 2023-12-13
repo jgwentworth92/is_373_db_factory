@@ -3,7 +3,7 @@ import AddButton from "@/components/addToDo";
 import { AddToDo, GetToDo } from "@/server/factories";
 import { headers } from "next/headers";
 import { getSession } from '@auth0/nextjs-auth0';
-import { useState, useEffect } from "react";
+import {redirect} from "next/navigation";
 
 ; // Import the necessary functions
 
@@ -13,6 +13,13 @@ export default async function AddTodoPage() {
     id: string;
     name: string;
   };
+
+  // Authentication
+  const session = await getSession();
+  const isAuthenticated = session?.user.sub;
+  if (!isAuthenticated) {
+    redirect("/api/auth/login");
+  }
   
   const todosFromDb = await GetToDo();
   const csrfToken = headers().get('X-CSRF-Token') || 'missing';

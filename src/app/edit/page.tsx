@@ -1,7 +1,17 @@
 import EditButton from "@/components/EditButton";
 import { PrismaClient } from "@prisma/client";
 import { headers } from "next/headers";
+import {redirect} from "next/navigation";
+import { getSession } from '@auth0/nextjs-auth0';
 export default async function Home() {
+
+  // Authentication
+  const session = await getSession();
+  const isAuthenticated = session?.user.sub;
+  if (!isAuthenticated) {
+    redirect("/api/auth/login");
+  }
+
   const prisma = new PrismaClient();
   const todos = await prisma.toDo.findMany();
   const csrfToken = headers().get('X-CSRF-Token') || 'missing';

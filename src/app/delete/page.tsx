@@ -1,16 +1,22 @@
-
-import { useState, useEffect } from "react";
-
 import DeleteButton from "@/components/DeleteButton";
 import { GetToDo } from "@/server/factories";
 import { headers } from "next/headers";
-
+import {getSession} from "@auth0/nextjs-auth0";
+import {redirect} from "next/navigation";
 
 export default async function Page() {
   type Todo = {
     id: string;
     name: string;
   };
+
+  // Authentication
+  const session = await getSession();
+  const isAuthenticated = session?.user.sub;
+  if (!isAuthenticated) {
+    redirect("/api/auth/login");
+  }
+
   const todosFromDb = await GetToDo();
   const csrfToken = headers().get('X-CSRF-Token') || 'missing';
     return (
