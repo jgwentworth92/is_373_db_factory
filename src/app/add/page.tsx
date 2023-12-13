@@ -2,11 +2,13 @@
 import AddButton from "@/components/addToDo";
 import { AddToDo, GetToDo } from "@/server/factories";
 import { headers } from "next/headers";
+import { getSession } from '@auth0/nextjs-auth0';
 import { useState, useEffect } from "react";
 
 ; // Import the necessary functions
 
 export default async function AddTodoPage() {
+
   type Todo = {
     id: string;
     name: string;
@@ -44,5 +46,5 @@ export default async function AddTodoPage() {
         </table>
       </div>
     </div>
-  );
+      );
 }
