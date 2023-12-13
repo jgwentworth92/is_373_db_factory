@@ -43,6 +43,18 @@ export function Header() {
             </Link>
           </li>
         </ul>
+        <ul className="flex">
+          <li className="flex auth">
+            <Link
+                className="inline-flex items-center justify-center rounded-full bg-blue-600 px-10 py-4 text-center text-base font-normal text-white hover:bg-opacity-90 disabled:bg-gray-500 lg:px-8 xl:px-10"
+                href="/api/auth/login">Login</Link>
+          </li>
+          <li className="flex auth">
+            <Link
+                className="inline-flex items-center justify-center rounded-full bg-blue-600 px-10 py-4 text-center text-base font-normal text-white hover:bg-opacity-90 disabled:bg-gray-500 lg:px-8 xl:px-10"
+                href="/api/auth/logout">Logout</Link>
+          </li>
+        </ul>
         <button className="flex justify-end p-4 md:hidden">
           <svg
             xmlns="http://www.w3.org/2000/svg"
