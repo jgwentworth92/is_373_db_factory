@@ -2,6 +2,7 @@
 
 import { AddAction } from "@/server/formHandlers";
 import { useFormStatus } from "react-dom";
+import { Button } from "./ui/button";
 
 export interface addProp {
   csrfToken: string;
@@ -10,28 +11,29 @@ export interface addProp {
 function Submit() {
   const status = useFormStatus();
   return (
-    <button
-      className="inline-flex items-center justify-center rounded-full bg-green-600 px-10 py-4 text-center text-base font-normal text-white hover:bg-opacity-90 disabled:bg-gray-500"
+    <Button
+      className="mt-3 flex w-full items-center justify-center gap-x-2 px-4 py-2.5 text-sm font-medium  sm:mt-0 sm:w-auto"
       disabled={status.pending}
       type="submit"
     >
-     add Todo
-    </button>
+      add Todo
+    </Button>
   );
 }
-export default function AddButton({
-  csrfToken,
-}: addProp) {
+export default function AddButton({ csrfToken }: addProp) {
   return (
-    <form action={AddAction}>
+    <form
+      action={AddAction}
+      className="items-center justify-center gap-x-3 sm:flex"
+    >
       <input type="hidden" name="csrf_token" value={csrfToken} />
-    
       <input
         type="text"
-       
+        placeholder="Enter your new To-Do"
         name="addTodo"
-        className="rounded-lg border border-gray-300 px-4 py-4 text-base font-normal text-gray-600 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600"
+        className="w-full rounded-lg px-3   py-2.5 shadow sm:w-auto sm:max-w-sm"
       />
+
       <Submit />
     </form>
   );

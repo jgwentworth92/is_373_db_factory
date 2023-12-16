@@ -23,6 +23,7 @@ export async function EditAction(formData: FormData) {
   
     // Proceed with update
     await editToDo(todoId, todoName);
+    revalidatePath('/');
   }
   
   export async function AddAction(formData: FormData) {
@@ -38,7 +39,7 @@ export async function EditAction(formData: FormData) {
   
     // Proceed with addition
     await AddToDo(todoName);
-    revalidatePath('/add');
+    revalidatePath('/');
   }
   
   
@@ -56,5 +57,5 @@ export async function EditAction(formData: FormData) {
   
     // Proceed with deletion
     await deleteToDo(todoID);
-    revalidatePath('/delete');
+    revalidatePath('/');
   }

@@ -1,65 +1,34 @@
-'use client'
-
 import Link from "next/link";
 import React from "react";
-import { signIn } from 'next-auth/react'
 
-export function Header() {
-  const [isLoading, setIsLoading] = React.useState(false)
+import { Button } from "./ui/button";
+import { getSession } from "@auth0/nextjs-auth0";
+
+export async function Header() {
+  const user = await getSession();
   return (
-    <header className="p-4 dark:bg-gray-800 dark:text-gray-100">
-      <div className="container mx-auto flex h-16 justify-between">
-        <ul className="hidden items-stretch space-x-3 md:flex">
-          <li className="flex">
-            <Link
-              className="inline-flex items-center justify-center rounded-full bg-blue-600 px-10 py-4 text-center text-base font-normal text-white hover:bg-opacity-90 disabled:bg-gray-500 lg:px-8 xl:px-10"
-              href="/"
-            >
-              toDo list{" "}
-            </Link>
-          </li>
-          <li className="flex">
-            <Link
-              className="inline-flex items-center justify-center rounded-full bg-blue-600 px-10 py-4 text-center text-base font-normal text-white hover:bg-opacity-90 disabled:bg-gray-500 lg:px-8 xl:px-10"
-              href="/delete"
-            >
-              delete{" "}
-            </Link>
-          </li>
-          <li className="flex">
-            <Link
-              className="inline-flex items-center justify-center rounded-full bg-blue-600 px-10 py-4 text-center text-base font-normal text-white hover:bg-opacity-90 disabled:bg-gray-500 lg:px-8 xl:px-10"
-              href="/add"
-            >
-              add to do
-            </Link>
-          </li>
-          <li className="flex">
-            <Link
-              className="inline-flex items-center justify-center rounded-full bg-blue-600 px-10 py-4 text-center text-base font-normal text-white hover:bg-opacity-90 disabled:bg-gray-500 lg:px-8 xl:px-10"
-              href="/edit"
-            >
-              edit{" "}
-            </Link>
-          </li>
-        </ul>
-        <button className="flex justify-end p-4 md:hidden">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            className="h-6 w-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            ></path>
-          </svg>
-        </button>
-      </div>
-    </header>
+    <>
+      <header className="sticky top-0 z-50 flex h-16 w-full shrink-0 items-center justify-between border-b bg-gradient-to-b from-background/10 via-background/50 to-background/80 px-4 backdrop-blur-xl">
+        <div className="flex items-center text-lg font-medium">
+          <Button variant="secondary"  asChild className="ml-2 ">
+            <Link href="/">To-Do List</Link>
+          </Button>
+          <Button variant="secondary" asChild className="ml-2">
+            <Link href="/todoActions">To-Do Actions</Link>
+          </Button>
+        </div>
+        <div className="flex items-center justify-end space-x-2">
+          {user?.user ? (
+            <Button  variant="secondary" asChild className="ml-2">
+              <Link href="/api/auth/logout">Logout</Link>
+            </Button>
+          ) : (
+            <Button variant="link" asChild className="-ml-2">
+              <Link href="/api/auth/login">Login</Link>
+            </Button>
+          )}
+        </div>
+      </header>
+    </>
   );
 }
