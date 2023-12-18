@@ -1,14 +1,18 @@
 "use server";
+import { getSession } from "@auth0/nextjs-auth0";
 import { PrismaClient } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 const prisma = new PrismaClient();
 
-export async function AddToDo(todo: string) {
+export async function AddToDo(todo: string,userid:string) {
+
+  console.log(userid)
   const createTodo = await prisma.toDo.create({
     data: {
       name: todo,
+      userID:userid
       // Assuming you have additional fields, you can add them here as needed.
     },
   });
@@ -41,7 +45,9 @@ export async function deleteToDo(id: string) {
 }
 
 export async function GetToDo() {
-  const todosFromDb = await prisma.toDo.findMany();
+  const user = await getSession();
+  const userid=user?.user.sub;
+  const todosFromDb = await prisma.toDo.findMany({where:{userID:userid}});
   return todosFromDb;
 }
 

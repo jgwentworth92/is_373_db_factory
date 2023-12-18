@@ -6,21 +6,21 @@ generator client {
 }
 
 datasource db {
-    provider     = "sqlite"
-    url          = env("DATABASE_URL")
-    relationMode = "prisma"
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+    relationMode = "prisma" 
 }
 
 model User {
-    id             String     @id @default(uuid())
-    email          String
-    purchases      Purchase[]
-    createdWidgets Widget[] // One User can create many Widgets
+    id              String      @id @default(uuid())
+    email           String
+    purchases       Purchase[]
+    createdWidgets  Widget[]    // One User can create many Widgets
 }
 
 model Purchase {
     id            String         @id @default(uuid())
-    status        String
+    status        PurchaseStatus
     transactionId String?
     purchaseDate  DateTime?
     user          User           @relation(fields: [userId], references: [id])
@@ -29,20 +29,24 @@ model Purchase {
     widgetId      String
 }
 
-// enum PurchaseStatus {
-//   pending
-//   fulfilled
-// }
-
-model Widget {
-    id        String     @id @default(uuid())
-    name      String
-    creator   User       @relation(fields: [creatorId], references: [id])
-    creatorId String
-    purchases Purchase[] // One Widget can have many Purchases
+enum PurchaseStatus {
+    pending
+    fulfilled
 }
 
+model Widget {
+    id         String    @id @default(uuid())
+    name       String
+    creator    User      @relation(fields: [creatorId], references: [id])
+    creatorId  String
+    purchases  Purchase[] // One Widget can have many Purchases
+}
+
+
+
+
 model toDo {
-    id   String @id @default(uuid())
-    name String
+    id              String      @id @default(uuid())
+    name          String
+    userID String
 }

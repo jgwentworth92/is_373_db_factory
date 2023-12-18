@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { editToDo, AddToDo, deleteToDo } from "./factories";
+import { getSession } from "@auth0/nextjs-auth0";
 
 export async function EditAction(formData: FormData) {
  
@@ -29,7 +30,8 @@ export async function EditAction(formData: FormData) {
   export async function AddAction(formData: FormData) {
 
     console.log("passed csrf validation");
-  
+    const user = await getSession();
+
     // Ensure todoName is a string
     const todoName = formData.get("addTodo");
     if (typeof todoName !== 'string') {
@@ -38,7 +40,7 @@ export async function EditAction(formData: FormData) {
     }
   
     // Proceed with addition
-    await AddToDo(todoName);
+    await AddToDo(todoName,user?.user.sub);
     revalidatePath('/');
   }
   

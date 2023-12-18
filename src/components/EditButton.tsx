@@ -33,7 +33,7 @@ export default function EditButton({
       <Dialog.Root className="fixed inset-0 z-10 overflow-y-auto">
         <Dialog.Trigger
           asChild
-          className="ml-2 mt-4 flex w-32 items-center justify-center rounded-md  py-2 "
+          className="ml-2 mt-4 flex w-16  items-center justify-center rounded-md  py-2 "
         >
           <Button variant={"default"}> edit</Button>
         </Dialog.Trigger>
